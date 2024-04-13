@@ -1,13 +1,11 @@
-from datetime import timedelta
-
 from namanga.apps.engine.serializers import (
     UserRegisterSerializer, UserSerializer
 )
 
 from namanga.apps.engine.utils.send_email import sent_mail_verification
 from namanga.apps.engine.views_container import (
-    User, GenericAPIView, Response, status, permissions, action, APIView, IsAuthenticated, swagger_auto_schema, openapi,
-    timezone, make_password, check_password, RefreshToken, ListAPIView, LimitOffsetPagination, AppStatus
+    User, GenericAPIView, Response, status, swagger_auto_schema, openapi,
+    timezone, AppStatus
 )
 
 
