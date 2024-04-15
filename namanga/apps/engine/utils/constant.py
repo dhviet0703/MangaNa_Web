@@ -3,6 +3,7 @@ from enum import Enum
 
 class AppStatus(Enum):
     EMAIL_ALREADY_EXIST = "EMAIL_ALREADY_EXIST", 400, "Email already exist."
+    USERNAME_ALREADY_EXIST = "USERNAME_ALREADY_EXIST", 400, "Username already exist."
     REGISTER_USER_FAIL = "REGISTER_USER_FAIL", 400, "Register user failed."
     SEND_MAIL_SUCCESS = 'SEND_MAIL_SUCCESS', 200, "Email sent successfully, please check your email."
     REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS', 200, "Register user successful."

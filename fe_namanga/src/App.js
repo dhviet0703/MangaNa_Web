@@ -1,21 +1,8 @@
-// import './App.css';
-// import LoginForm from './Components/AuthForm/LoginForm';
-// import RegisterForm from './Components/AuthForm/RegisterForm'
-
-// function App() {
-//   return (
-//     <div>
-//       <LoginForm />
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import React, { useState } from 'react';
 import './App.css';
 import LoginForm from './Components/AuthForm/LoginForm';
 import RegisterForm from './Components/AuthForm/RegisterForm';
+import Home from './Components/AuthForm/Home';
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);

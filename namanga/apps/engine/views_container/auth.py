@@ -19,15 +19,7 @@ class RegisterViewSet(GenericAPIView):
             user = serializer.save()
             sent_mail_verification(user)
             return Response(AppStatus.SEND_MAIL_SUCCESS.message)
-        else:
-            user = User.objects.filter(email=serializer.data['email']).first()
-            if user and not user.is_active:
-                user.set_password(serializer.data['password'])
-                user.full_name = serializer.data['username']
-                user.save()
-                sent_mail_verification(user)
-                return Response(AppStatus.SEND_MAIL_SUCCESS.message)
-            return Response(serializer.errors)
+        return Response(AppStatus.REGISTER_USER_FAIL.message)
 
 
 class ResendVerificationViewSet(GenericAPIView):
