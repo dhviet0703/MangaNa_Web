@@ -14,6 +14,10 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         if user and user.is_active:
             raise serializers.ValidationError(AppStatus.EMAIL_ALREADY_EXIST.message)
 
+        user_with_name = User.objects.filter(username=validated_data["username"]).first()
+        if user_with_name:
+            raise serializers.ValidationError(AppStatus.USERNAME_ALREADY_EXIST.message)
+
         with transaction.atomic():
             try:
                 if not user:
