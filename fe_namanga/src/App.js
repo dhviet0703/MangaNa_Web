@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+// import './App.css';
+// import LoginForm from './Components/AuthForm/LoginForm';
+// import RegisterForm from './Components/AuthForm/RegisterForm'
+
+// function App() {
+//   return (
+//     <div>
+//       <LoginForm />
+//     </div>
+//   );
+// }
+
+// export default App;
+
+import React, { useState } from 'react';
 import './App.css';
+import LoginForm from './Components/AuthForm/LoginForm';
+import RegisterForm from './Components/AuthForm/RegisterForm';
 
 function App() {
+  const [isLogin, setIsLogin] = useState(true);
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {isLogin ? <LoginForm toggleForm={toggleForm} /> : <RegisterForm toggleForm={toggleForm} />}
     </div>
   );
 }
