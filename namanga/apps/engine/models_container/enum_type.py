@@ -19,3 +19,37 @@ class SystemRoleEnum(EnumType):
     ADMIN = 'ADMIN'
     POSTER = 'POSTER'
     USER = 'USER'
+
+
+class RoleMangaEnum(EnumType):
+    POSTER = 'POSTER'
+    USER = 'USER'
+
+
+class ManGaGenreEnum(EnumType):
+    ACTION = 'Action'
+    ADVENTURE = 'Adventure'
+    ANIME = 'Anime'
+    CHUYENSINH = 'Chuyển sinh'
+    CODAI = 'Cổ đại'
+    COMEDY = 'Comedy'
+    DEMON = 'Demons'
+    DETECTIVE = 'Detective'
+    DUOJINSHI = 'Doujinshi'
+    DRAMA = 'Drama'
+    FANTASY = 'Fantasy'
+    GENDER = 'Gender'
+    BENDER = 'Bender'
+    HAREM = 'Harem'
+    HISTORICAL = 'Historical'
+    HORRON = 'Horror'
+    ISEKAI = 'Isekai'
+    JOSEI = 'Josei'
+    MAFIA = 'Mafia'
+    MAGIC = 'Magic'
+    ONE_SHOT = 'One shot'
+    PSYCHOLOGICAL = 'Psychological'
+    ROMANCE = 'Romance'
+    SCHOOL_LIFE = 'School LifeSci-fi'
+    SHOUNEN = 'Shounen'
+    TRUYENMAU = 'Truyện màu'

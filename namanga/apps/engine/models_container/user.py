@@ -50,5 +50,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     code_lifetime = models.DateTimeField(null=True, blank=True)
     role = models.CharField(max_length=30, null=False, blank=False, choices=SystemRoleEnum.choices(),
                             default=SystemRoleEnum.USER)
+    level = models.IntegerField(default=0)
 
     objects = CustomUserManager()
