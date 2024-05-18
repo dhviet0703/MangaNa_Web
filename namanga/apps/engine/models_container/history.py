@@ -1,13 +1,12 @@
 from namanga.apps.engine.models_container import (models, uuid)
-from namanga.apps.engine.models import User, Chapter
+from namanga.apps.engine.models import User
 
 
-class UserChapter(models.Model):
+class History(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE)
 
-    views = models.IntegerField(default=1)
+    content = models.TextField(null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

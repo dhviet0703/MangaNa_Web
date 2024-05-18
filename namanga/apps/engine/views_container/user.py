@@ -1,19 +1,18 @@
 from datetime import timedelta
 
 from namanga.apps.engine.models import User
+from namanga.apps.engine.utils.send_email import sent_mail_verification
+
 from namanga.apps.engine.serializers import (
     UserSerializer, UpdateUserSerializer
 )
-from namanga.apps.engine.utils.constant import AppStatus
-
-from namanga.apps.engine.utils.send_email import sent_mail_verification
 from namanga.apps.engine.views_container import (
     GenericAPIView, Response, status, permissions, action, APIView, IsAuthenticated, swagger_auto_schema, openapi,
-    timezone, make_password, check_password, RefreshToken, ListAPIView, LimitOffsetPagination
+    timezone, make_password, check_password, RefreshToken, ListAPIView, LimitOffsetPagination, AppStatus
 )
 
 
-class UserDetailView(APIView):
+class UserDetailViewSet(APIView):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserSerializer
 
@@ -35,3 +34,5 @@ class UserDetailView(APIView):
             user_me = UserSerializer(request.user)
             return Response(user_me.data)
         return Response(serializer.errors)
+
+    

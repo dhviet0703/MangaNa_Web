@@ -153,6 +153,7 @@ SWAGGER_SETTINGS = {
     },
     "USE_SESSION_AUTH": False,
     "SCHEMA_PROTOCOLS": ["http", "https"],
+    # "SCHEMA_PROTOCOLS": ["https"],
 }
 
 SIMPLE_JWT = {
