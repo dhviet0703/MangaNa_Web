@@ -38,8 +38,10 @@ class CustomUserManager(UserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
     email = models.EmailField(null=False, blank=False, unique=True)
     password = models.CharField(max_length=128, blank=True)
+    avatar = models.CharField(max_length=255, null=True, blank=True)
     last_login = models.DateTimeField(blank=True, null=True)
     username = models.CharField(max_length=128, null=False, blank=False)
     is_active = models.BooleanField(default=False, blank=True)

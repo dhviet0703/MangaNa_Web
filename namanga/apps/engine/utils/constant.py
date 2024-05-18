@@ -2,14 +2,21 @@ from enum import Enum
 
 
 class AppStatus(Enum):
-    EMAIL_ALREADY_EXIST = "EMAIL_ALREADY_EXIST", 400, "Email already exist."
-    USERNAME_ALREADY_EXIST = "USERNAME_ALREADY_EXIST", 400, "Username already exist."
-    REGISTER_USER_FAIL = "REGISTER_USER_FAIL", 400, "Register user failed."
-    SEND_MAIL_SUCCESS = 'SEND_MAIL_SUCCESS', 200, "Email sent successfully, please check your email."
     REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS', 200, "Register user successful."
+    SEND_MAIL_SUCCESS = 'SEND_MAIL_SUCCESS', 200, "Email sent successfully, please check your email."
+
+    ID_INVALID = 'ID_INVALID', 400, "ID model invalid."
+    NAME_MANGA_INVALID = "NAME_MANGA_INVALID", 400, "Name manga invalid."
+    REGISTER_USER_FAIL = "REGISTER_USER_FAIL", 400, "Register user failed."
+    EMAIL_ALREADY_EXIST = "EMAIL_ALREADY_EXIST", 400, "Email already exist."
     EXPIRED_VERIFY_CODE = 'EXPIRED_VERIFY_CODE', 400, 'Your code is expired.'
     INVALID_VERIFY_CODE = "INVALID_VERIFY_CODE", 400, "Your code is invalid."
+    USERNAME_ALREADY_EXIST = "USERNAME_ALREADY_EXIST", 400, "Username already exist."
+    USER_NOT_HAVE_ENOUGH_PERMISSION = "USER_NOT_HAVE_ENOUGH_PERMISSION", 400, "User does not have enough permission."
+
     EMAIL_NOT_EXIST = "EMAIL_NOT_EXIST", 404, "Email does not exist."
+
+
     # TIMEOUT_CHANGE_PASSWORD = "TIMEOUT_CHANGE_PASSWORD", 400, "Timeout to change password."
     # PASSWORDS_ARE_NOT_THE_SAME = "PASSWORDS_ARE_NOT_THE_SAME", 400, "Password and password confirm are not the same."
     # PASSWORD_RESET_SUCCESS = "PASSWORD_RESET_SUCCESS", 200, "Password reset successfully."

@@ -1,7 +1,7 @@
 from namanga.apps.engine.routers import *
 
-from namanga.apps.engine.views import (UserDetailView)
+from namanga.apps.engine.views import (UserDetailViewSet)
 
 urlpatterns = [
-    path('user/me/', UserDetailView.as_view(), name='user-detail'),
+    path('me/', UserDetailViewSet.as_view(), name='user-detail'),
 ]
