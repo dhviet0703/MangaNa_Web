@@ -46,12 +46,14 @@ class MangaViewSet(GenericViewSet, mixins.CreateModelMixin,
 class CreateMangaViewSet(APIView):
     permission_classes = [permissions.IsAuthenticated]
     parser_classes = [MultiPartParser, FormParser]
+    serializer_class = MangaSerializers
 
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter(name="name", in_=openapi.IN_QUERY, type=openapi.TYPE_STRING),
-            openapi.Parameter(name="author", in_=openapi.IN_QUERY, type=openapi.TYPE_STRING),
-            openapi.Parameter(name="introduction", in_=openapi.IN_QUERY, type=openapi.TYPE_STRING),
+            openapi.Parameter(name="name", in_=openapi.IN_FORM, type=openapi.TYPE_STRING),
+            openapi.Parameter(name="author", in_=openapi.IN_FORM, type=openapi.TYPE_STRING),
+            openapi.Parameter(name="introduction", in_=openapi.IN_FORM, type=openapi.TYPE_STRING),
+            openapi.Parameter(name="genres", in_=openapi.IN_FORM, type=openapi.TYPE_STRING),
             openapi.Parameter(name="image_data", in_=openapi.IN_FORM, type=openapi.TYPE_FILE,
                               description="Image data of manga"), ]
     )
@@ -59,10 +61,15 @@ class CreateMangaViewSet(APIView):
         current_user = request.user
         if not check_role_crud_manga(current_user.role):
             return Response(AppStatus.USER_NOT_HAVE_ENOUGH_PERMISSION.message)
-        name = request.query_params.get('name')
-        author = request.query_params.get('author')
-        introduction = request.query_params.get('introduction')
+
+        name = request.data.get('name')
+        author = request.data.get('author')
+        introduction = request.data.get('introduction')
+        genres = request.data.get('genres')
         image_data = request.data.get('image_data')
+
+        if not all([name, author, introduction, genres, image_data]):
+            return Response({"detail": "Missing one or more required fields."}, status=status.HTTP_400_BAD_REQUEST)
 
         path_image = os.path.join(cfg.DIR_IMAGE_MANGA_PTH, 'avatar_manga')
         os.makedirs(path_image, exist_ok=True)
@@ -71,9 +78,11 @@ class CreateMangaViewSet(APIView):
         with open(file_path, 'wb') as f:
             f.write(image_data.read())
 
-        manga = Manga(name=name, author=author, introduction=introduction, image=file_path)
+        manga = Manga(name=name, author=author, introduction=introduction, genres=genres, image=file_path)
+        manga.save()
+        serializer = self.serializer_class(manga)
 
-        return Response("Manga created successfully", status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class DeleteMangaViewSet(GenericAPIView):
