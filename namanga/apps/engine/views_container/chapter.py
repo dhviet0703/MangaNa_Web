@@ -79,8 +79,33 @@ class CreateChapterViewSet(APIView):
         chapter = Chapter(manga=manga, number=number, title=title)
         chapter.save()
         save_data_image_zip(chapter.id, path_image, data_chapter)
+        manga.total_chapter += 1
+        manga.save()
 
         return Response("Chapter created successfully", status=status.HTTP_200_OK)
+
+
+class UpdateViewsChapterViewSet(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(name="chapter_id", in_=openapi.IN_QUERY, type=openapi.TYPE_STRING),
+        ]
+    )
+    def put(self, request, *args, **kwargs):
+        current_user = request.user
+        chapter_id = request.query_params.get('chapter_id')
+        chapter = Chapter.objects.filter(id=chapter_id).first()
+        chapter.views += 1
+
+        manga = Manga.objects.filter(id=chapter.manga_id).first()
+        manga.views += 1
+        chapter.save()
+        manga.save()
+
+        return Response("Update views successfully", status=status.HTTP_200_OK)
+
 
 
 class DeleteChapterViewSet(GenericAPIView):
@@ -89,17 +114,17 @@ class DeleteChapterViewSet(GenericAPIView):
 
     @swagger_auto_schema(
         manual_parameters=[
-            openapi.Parameter(name='manga_id', in_=openapi.IN_QUERY, type=openapi.TYPE_STRING, required=True, )]
+            openapi.Parameter(name='chapter_id', in_=openapi.IN_QUERY, type=openapi.TYPE_STRING, required=True, )]
     )
     def delete(self, request, *args, **kwargs):
         current_user = request.user
         if not check_role_crud_manga(current_user.role):
             return Response(AppStatus.USER_NOT_HAVE_ENOUGH_PERMISSION.message)
-        manga_id = request.query_params.get("manga_id")
-        manga = Chapter.objects.filter(id=manga_id).first()
+        chapter_id = request.query_params.get("chapter_id")
+        chapter = Chapter.objects.filter(id=chapter_id).first()
 
-        if not manga:
+        if not chapter:
             return Response(AppStatus.ID_INVALID.message)
 
-        manga.delete()
+        chapter.delete()
         return Response(Response("Chapter created successfully", status=status.HTTP_200_OK))
