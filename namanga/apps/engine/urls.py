@@ -11,4 +11,5 @@ urlpatterns = [
     path('user/', include('namanga.apps.engine.routers.user')),
     path('manga/', include('namanga.apps.engine.routers.manga')),
     path('chapter/', include('namanga.apps.engine.routers.chapter')),
+    path('history/', include('namanga.apps.engine.routers.history')),
 ]
