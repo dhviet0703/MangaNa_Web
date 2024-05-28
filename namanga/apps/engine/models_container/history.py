@@ -1,5 +1,5 @@
 from namanga.apps.engine.models_container import (models, uuid)
-from namanga.apps.engine.models import User
+from namanga.apps.engine.models import User, Chapter
 
 
 class History(models.Model):
